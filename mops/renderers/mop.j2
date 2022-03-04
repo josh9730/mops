@@ -140,15 +140,15 @@ h2. Section {{ loop.index }} - {{ section }}
 # *&#91;NOC]* {{ step }}
 {% elif header == 'jumper' %}
 {{ jumpers(step) }}
-{% elif header == 'cmd-noc' %}
+{% elif header == 'cmd_noc' %}
 {{ cmd('NOC', step) }}
-{% elif header == 'expand-noc' %}
+{% elif header == 'expand_noc' %}
 {{ expand('NOC', step) }}
 {% elif header == 'core' %}
 # *&#91;CORE]* {{ step }}
-{% elif header == 'cmd-core' %}
+{% elif header == 'cmd_core' %}
 {{ cmd('CORE', step) }}
-{% elif header == 'expand-core' %}
+{% elif header == 'expand_core' %}
 {{ expand('CORE', step) }}
 {% elif header == 'note' %}
 ** *NOTE:* {{ step }}

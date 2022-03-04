@@ -1,11 +1,11 @@
 ---
 # Section options:
 #   - rh, core, noc: Single line instructions
-#   - cmd-rh, cmd-core, cmd-noc:  # Multi-line instructions in a no-format macro
+#   - cmd_rh, cmd_core, cmd_noc:  # Multi-line instructions in a no-format macro
 #     - Intstruction line ('do this')
 #     - |-
 #       Multiline command lines
-#   - expand-core, expand-noc: Multi-line instructions in an expand macro. Written same as cmd-
+#   - expand_core, expand_noc: Multi-line instructions in an expand macro. Written same as cmd_
 #     - Intstruction line ('do this')
 #     - |-
 #       Multiline command lines
