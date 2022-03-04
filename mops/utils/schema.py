@@ -1,4 +1,5 @@
 import re
+import sys
 import datetime
 from enum import Enum
 from typing import Optional, Union
@@ -78,16 +79,44 @@ class BaseYAML(BaseModel):
         assert ticket[:3] in JIRA_PROJECTS_LIST, error_msg
         assert ticket[3] == "-", error_msg
         assert ticket[4:].isdigit(), error_msg
+        return ticket
 
 
 class CDModel(BaseYAML):
     """Change Doc validator."""
 
-    gcal_auth_path: Optional[DirectoryPath]
-    start_time: datetime.time
-    end_time: datetime.time
-    start_day: Union[Regex, datetime.date]
+    start_time: Optional[str] = None
+    end_time: Optional[str] = None
+    start_day: Optional[Union[Regex, datetime.date]] = None
     changes: dict[str, list]
+    gcal_auth_path: Optional[DirectoryPath] = None
+
+    @validator('start_time', "end_time")
+    def check_times(cls, v):
+        """Validate input time strings are valid times in 24hr format."""
+        if v:
+            error_msg = f"{v} must be a valid time in the form HHMM."
+            assert len(v) == 4, error_msg
+            try:
+                hour = int(v[:2])
+                minute = int(v[2:])
+            except ValueError:
+                sys.exit(error_msg)
+            assert 0 <= hour < 24, error_msg
+            assert 0 <= minute < 60, error_msg
+            return v
+
+    @validator("gcal_auth_path")
+    def check_calendar_vars(cls, v, values, **kwargs):
+        error_msg = "If any of start_time, end_time, or start_day are set, all must be set in addition to gcal_auth_path."
+        calendar_vars = [
+            values.get("start_time"),
+            values.get("end_time"),
+            values.get("start_day"),
+        ]
+        if any(calendar_vars):
+            assert all(calendar_vars), error_msg
+            assert v, error_msg
 
     @validator("changes")
     def check_changes(cls, changes):
@@ -97,6 +126,7 @@ class CDModel(BaseYAML):
             assert isinstance(items, list)
             for item in items:
                 assert isinstance(item, str)
+        return changes
 
 
 class MOPModel(BaseYAML):

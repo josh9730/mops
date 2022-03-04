@@ -9,7 +9,6 @@ from google.auth.transport.requests import Request
 
 class GCal:
     def __init__(self, gcal_auth_path: str):
-
         # If modifying these scopes, delete the file token.pickle.
         SCOPES = ["https://www.googleapis.com/auth/calendar.events"]
         creds = None

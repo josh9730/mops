@@ -1,6 +1,7 @@
 import sys
 import os
 import shutil
+from typing import Optional
 import yaml
 import typer
 from pydantic import ValidationError
@@ -33,7 +34,7 @@ def render_yaml(data, yaml_type: str):
     return template.render(data)
 
 
-def reset_yaml(repository: str, yaml_type: str, gcal_auth_path: str = None):
+def reset_yaml(repository: str, yaml_type: str, gcal_auth_path: Optional[str]):
     """Reset MOP or CD YAML files to defaults."""
     env = Environment(
         loader=FileSystemLoader("defaults/"), trim_blocks=True, lstrip_blocks=True
@@ -52,6 +53,7 @@ def yaml_init(yaml_type: str):
 def validate_yaml(data: dict, yaml_type: str):
     """Validate against schema for specified type."""
     try:
+        print(data)
         MOPModel(**data) if yaml_type == "mop" else CDModel(**data)
     except ValidationError as e:
         sys.exit(e)
@@ -80,8 +82,9 @@ def main(yaml_type: str, data: dict, **kwargs):
       reset, default, render, link: bool
     """
     repository = data["repository"]
+    gcal_auth_path = data.get("gcal_auth_path")
     if kwargs["reset"]:
-        reset_yaml(repository, yaml_type)
+        reset_yaml(repository, yaml_type, gcal_auth_path)
 
     else:
         atlassian = Atlassian()
@@ -89,7 +92,7 @@ def main(yaml_type: str, data: dict, **kwargs):
         rendered_data = render_yaml(data, yaml_type)
 
         if kwargs["default"]:
-            reset_yaml(repository, yaml_type)
+            reset_yaml(repository, yaml_type, gcal_auth_path)
 
         if kwargs["render"]:
             print(rendered_data)
@@ -108,7 +111,7 @@ def main(yaml_type: str, data: dict, **kwargs):
             )
             print(f"\tMoving YAML to repo: {repository}\n")
             gcal_auth_path = data["gcal_auth_path"] if yaml_type == "cd" else None
-            move_yaml(page_title, repository, yaml_type, gcal_auth_path)
+            move_yaml(page_title, repository, yaml_type)
 
             if kwargs["link"]:
                 print(f"\tAdding link to {ticket}")
@@ -140,6 +143,8 @@ def cd(
     main("cd", data, **ARGUMENTS)
 
     if calendar:
+        if not data["gcal_auth_path"]:
+            raise ValueError("\n\ngcal_auth_path must be defined in cd.yaml.\n")
         start_time = str(data["start_time"])
         end_time = str(data["end_time"])
         start_day = str(data["start_day"])

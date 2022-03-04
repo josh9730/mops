@@ -93,24 +93,24 @@ def cd_dict():
         "changes": {
             "sut-coe-1": [
                 "router isis 2152 interface te0/0/2/3 "
-                "address-family ipv4 unicast metric 9999\n"
+                "address-family ipv4 unicast metric 9999"
                 "router isis 2152 interface te0/0/2/3 "
                 "address-family ipv6 unicast metric 9999"
             ],
             "sut-coe-2": [
                 "router isis 2152 interface te0/0/2/3 "
-                "address-family ipv4 unicast metric 9999\n"
+                "address-family ipv4 unicast metric 9999"
                 "router isis 2152 interface te0/0/2/3 "
                 "address-family ipv6 unicast metric 9999"
             ],
         },
-        "end_time": 1730,
+        "end_time": "1500",
         "gcal_auth_path": "/Users/jdickman/Google Drive/My Drive/Scripts/",
         "page_title": "TEST",
         "parent_page_id": 8884129,
         "repository": "/Users/jdickman/Google Drive/My Drive/MOPs/YAML/",
         "start_day": "today",
-        "start_time": 1720,
+        "start_time": "1740",
         "summary": ["Cost-In CLR20029"],
         "ticket": "NOC-507412",
     }
