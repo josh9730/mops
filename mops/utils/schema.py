@@ -11,7 +11,24 @@ from pydantic import (
 )
 from .atlassian import Atlassian
 
+
+print()
+
 JIRA_PROJECTS_LIST = Atlassian().jira_projects_list()
+
+VALID_JUMPER_ITEMS = [
+    "acable",
+    "acage",
+    "adevice",
+    "aport",
+    "arack",
+    "aterm",
+    "zcage",
+    "zdevice",
+    "zport",
+    "zrack",
+    "zterm",
+]
 
 
 class SectionOptions(str, Enum):
@@ -78,6 +95,8 @@ class CDModel(BaseYAML):
         for title, items in changes.items():
             assert isinstance(title, str)
             assert isinstance(items, list)
+            for item in items:
+                assert isinstance(item, str)
 
 
 class MOPModel(BaseYAML):
@@ -113,8 +132,29 @@ class MOPModel(BaseYAML):
     def check_sections(cls, sections):
         """Validate that the keys of each section match the Enum model/Jinja template."""
         for section_list in sections.values():
-            for i in section_list:
-                section_header = list(i.keys())[0].upper()
-                assert SectionOptions.has_member(
-                    section_header
-                ), f"Invalid section option: '{section_header.lower()}', must use one of {SectionOptions.list()}"
+            for section in section_list:
+                for section_header, section_value in section.items():
+                    # check top level for each section
+                    # ex: '{rh: Do a thing}'
+                    assert SectionOptions.has_member(
+                        section_header.upper()
+                    ), f"Invalid section option: '{section_header}', must use one of {SectionOptions.list()}"
+                    assert isinstance(section_value, str) or isinstance(
+                        section_value, list
+                    )
+
+                    if section_header == "jumper":
+                        # check jumper var
+                        for counter, jumper in enumerate(section_value):
+                            if counter == 0:
+                                assert isinstance(jumper, str)
+                                continue
+                            for item in list(jumper.keys()):
+                                assert (
+                                    item in VALID_JUMPER_ITEMS
+                                ), f"Valid Jumper options: {VALID_JUMPER_ITEMS}."
+
+                    elif isinstance(section_value, list):
+                        # check multi-line vars
+                        for i in section_value:
+                            assert isinstance(i, str)

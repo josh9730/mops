@@ -1,9 +1,9 @@
 import pytest
-import main
+from mops import main
 
 
 @pytest.fixture
-def create_mop_dict():
+def mop_dict():
     return {
         "approval": "COR-1696",
         "escalation": "Deploying Engineer",
@@ -87,3 +87,38 @@ def create_mop_dict():
     }
 
 
+@pytest.fixture
+def cd_dict():
+    return {
+        "changes": {
+            "sut-coe-1": [
+                "router isis 2152 interface te0/0/2/3 "
+                "address-family ipv4 unicast metric 9999\n"
+                "router isis 2152 interface te0/0/2/3 "
+                "address-family ipv6 unicast metric 9999"
+            ],
+            "sut-coe-2": [
+                "router isis 2152 interface te0/0/2/3 "
+                "address-family ipv4 unicast metric 9999\n"
+                "router isis 2152 interface te0/0/2/3 "
+                "address-family ipv6 unicast metric 9999"
+            ],
+        },
+        "end_time": 1730,
+        "gcal_auth_path": "/Users/jdickman/Google Drive/My Drive/Scripts/",
+        "page_title": "TEST",
+        "parent_page_id": 8884129,
+        "repository": "/Users/jdickman/Google Drive/My Drive/MOPs/YAML/",
+        "start_day": "today",
+        "start_time": 1720,
+        "summary": ["Cost-In CLR20029"],
+        "ticket": "NOC-507412",
+    }
+
+
+def test_mop_schema(mop_dict):
+    main.validate_yaml(mop_dict, "mop")
+
+
+def test_cd_schema(cd_dict):
+    main.validate_yaml(cd_dict, "cd")

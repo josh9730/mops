@@ -38,7 +38,7 @@ class GCal:
         self.service = build("calendar", "v3", credentials=creds)
         self.internal_cal_url = keyring.get_password("internal_cal", "url")
 
-    def create_calendar_event(self, *args: list):
+    def create_calendar_event(self, *args: str):
         """Creates Internal Calendar Event
 
         Args:

@@ -10,6 +10,7 @@ Only the `mop.yaml` or `cd.yaml` are editted during MOP/CD creation. No python o
 3. If requested, link Jira ticket & Confluence page together
 4. Move completed YAML to a repo for long term reference
 5. If requested, return completed YAML to defaults (keeping user variables)
+6. For Change Docs, optionally create a Google Calendar entry
 
 # How to Install
 
@@ -49,7 +50,7 @@ That's it! No more setup is needed.
 
 ### Running the program
 
-Use `python3 main.py` to run. Typer is used for the CLI interface, see `python3 main.py --help` for details.
+Use `python3 main.py` to run. Typer is used for the CLI, see `python3 main.py --help` for details.
 
 - `-l`: Add Jira Link. Note that this should only be done once, if an edit is pushed do not specify a link as this will create multiple links (can be removed in Jira).
 - `-c`: Create Google Calendar entry. Note that this does require setting up the Google Drive API (not covered in this guide).
@@ -216,7 +217,7 @@ sections:
         Rack 666
 ```
 
-See [HERE](https://github.com/josh9730/refactored-couscous/tree/mops/mops/images/MOP.pdf) for a PDF of the completed MOP.
+See [HERE](https://github.com/josh9730/mops/tree/mops/images/MOP.pdf) for a PDF of the completed MOP.
 
 ### CD
 
@@ -256,4 +257,4 @@ changes:
 
 ```
 
-See [HERE](https://github.com/josh9730/refactored-couscous/tree/mops/mops/images/CD.pdf) for the PDF of the completed CD.
+See [HERE](https://github.com/josh9730/mops/tree/mops/images/CD.pdf) for the PDF of the completed CD.

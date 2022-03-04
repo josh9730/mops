@@ -57,7 +57,7 @@ def validate_yaml(data: dict, yaml_type: str):
         sys.exit(e)
 
 
-def move_yaml(*args: list):
+def move_yaml(*args: str):
     """Move YAML to designated repo.
 
     args:
@@ -71,7 +71,7 @@ def move_yaml(*args: list):
     )
 
 
-def main(yaml_type, data, **kwargs):
+def main(yaml_type: str, data: dict, **kwargs):
     """Main function for CD, MOP gen.
 
     Args:
@@ -121,6 +121,7 @@ def main(yaml_type, data, **kwargs):
 
 @mops.command()
 def mop() -> None:
+    """Create MOP from mop.yaml"""
     data = yaml_init("mop")
     main("mop", data, **ARGUMENTS)
 
@@ -134,6 +135,7 @@ def cd(
         help="Create Internal Calendar Entry. Only use once, will create multiple events.",
     ),
 ) -> None:
+    """Create Change Doc from cd.yaml"""
     data = yaml_init("cd")
     main("cd", data, **ARGUMENTS)
 
