@@ -1,7 +1,9 @@
 __pycache__/
+__pycache__
 .vscode
 *.json
 *.pickle
 *.yml
 venv/
 doc.txt
+.DS_Store

@@ -217,7 +217,7 @@ sections:
         Rack 666
 ```
 
-See [HERE](https://github.com/josh9730/mops/tree/mops/images/MOP.pdf) for a PDF of the completed MOP.
+See [HERE](https://github.com/josh9730/mops/tree/main/images/MOP.pdf) for a PDF of the completed MOP.
 
 ### CD
 
@@ -257,4 +257,4 @@ changes:
 
 ```
 
-See [HERE](https://github.com/josh9730/mops/tree/mops/images/CD.pdf) for the PDF of the completed CD.
+See [HERE](https://github.com/josh9730/mops/tree/main/images/CD.pdf) for the PDF of the completed CD.
