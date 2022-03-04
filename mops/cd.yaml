@@ -1,0 +1,24 @@
+---
+repository: /Users/jdickman/Google Drive/My Drive/MOPs/YAML/
+gcal_auth_path: "/Users/jdickman/Google Drive/My Drive/Scripts/"
+
+ticket: NOC-507412
+page_title: TEST
+parent_page_id: 8884129
+summary:
+ - Cost-In CLR20029
+
+# times must be string, start_day must be either 'today' or in YYYY-MM-DD format
+start_time: 1720
+end_time: 1730
+start_day: today
+
+changes:
+  "sut-coe-1":
+    - |-
+      router isis 2152 interface te0/0/2/3 address-family ipv4 unicast metric 9999
+      router isis 2152 interface te0/0/2/3 address-family ipv6 unicast metric 9999
+  "sut-coe-2":
+    - |-
+      router isis 2152 interface te0/0/2/3 address-family ipv4 unicast metric 9999
+      router isis 2152 interface te0/0/2/3 address-family ipv6 unicast metric 9999

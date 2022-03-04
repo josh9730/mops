@@ -1,0 +1,15 @@
+{jira:key={{ ticket }}}
+
+h2. SUMMARY
+{% for i in summary %}
+* {{ i }}
+{% endfor %}
+
+h2. CHANGES
+{% for header, section in changes.items() %}
+{code:title={{ header }}|linenumbers=true|language=text|collapse=true}
+{% for i in section %}
+{{ i }}
+{% endfor %}
+{code}
+{% endfor %}
