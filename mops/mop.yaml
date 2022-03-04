@@ -25,45 +25,30 @@
 #   - note: Bulleted item underneath the previous instruction
 
 
-repository: /Users/jdickman/Google Drive/My Drive/MOPs/YAML/
-page_title: TEST
-parent_page_id: 45428825
-ticket: NOC-664802
+repository: 
+page_title: 
+parent_page_id: 
+ticket: 
 
 summary:
- - Install 48-port LC panel at SACR2
-level: 0
-executing_dep: NOC
-rh: SACR2
-approval: COR-1696
+  - 
+level: 
+executing_dep: 
+rh: 
+approval: 
 impact:
-- None
-escalation:
+  - 
+escalation: Deploying Engineer
 
 partial_rollback: True
 rollback_steps:
- -
+  -
 pre_maint:
--
+  -
 
-rh_equip:
-  - Labeler
+tech_equip:
+  -
 shipping:
-  NOC-663883:
-    - 7754 7528 9544
-    - "22681004"
-  NOC-663884:
-    - 7754 7528 9544
-    - "22681004"
+
 
 sections:
-  "Install Panel":
-    - rh: Locate rack 1.008
-    - rh: Install the shipped 48-port LC panel in 1.008 at RU 36
-    - rh: Label panel as "XCP-ARDO1-410.02-U20"
-    - noc: Get billable time.
-  "Install Panel2":
-    - rh: Locate rack 1.008
-    - rh: Install the shipped 48-port LC panel in 1.008 at RU 36
-    - rh: Label panel as "XCP-ARDO1-410.02-U20"
-    - noc: Get billable time.
