@@ -1,7 +1,5 @@
 ---
 repository: /Users/jdickman/Google Drive/My Drive/MOPs/YAML/
-gcal_auth_path: "/Users/jdickman/Google Drive/My Drive/Scripts/"
-
 ticket: NOC-507412
 page_title: TEST
 parent_page_id: 8884129
@@ -9,6 +7,7 @@ summary:
  - Cost-In CLR20029
 
 # times must be string, start_day must be either 'today' or in YYYY-MM-DD format
+gcal_auth_path: "/Users/jdickman/Google Drive/My Drive/Scripts/"
 start_time: 1720
 end_time: 1730
 start_day: today

@@ -66,7 +66,7 @@ class BaseYAML(BaseModel):
 class CDModel(BaseYAML):
     """Change Doc validator."""
 
-    gcal_auth_path: DirectoryPath
+    gcal_auth_path: Optional[DirectoryPath]
     start_time: datetime.time
     end_time: datetime.time
     start_day: Union[Regex, datetime.date]
