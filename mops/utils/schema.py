@@ -91,7 +91,7 @@ class CDModel(BaseYAML):
     changes: dict[str, list]
     gcal_auth_path: Optional[DirectoryPath] = None
 
-    @validator('start_time', "end_time")
+    @validator("start_time", "end_time")
     def check_times(cls, v):
         """Validate input time strings are valid times in 24hr format."""
         if v:
@@ -127,6 +127,11 @@ class CDModel(BaseYAML):
             for item in items:
                 assert isinstance(item, str)
         return changes
+
+    @validator("ticket")
+    def check_tickets_model(cls, ticket):
+        """Check MOP Tickets."""
+        BaseYAML.check_tickets_all(ticket)
 
 
 class MOPModel(BaseYAML):
