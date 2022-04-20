@@ -43,7 +43,7 @@ class Atlassian:
             *link_data, relationship="mentioned in"
         )
 
-    def confluence_create_or_update(self, page_data: list) -> None:
+    def confluence_create_or_update(self, page_data: tuple) -> None:
         """Create or Update Confluence page.
 
         page_data: list in the form of:

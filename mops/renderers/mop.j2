@@ -36,7 +36,7 @@ Jumper #{{ count.value }}:
         Port: {{ j.aport }}
         {% endif %}{% if j.acable %}
         Jumper: {{ j.acable}}
-        {% endif %}{% if j.label %}
+        {% endif %}{% if j.alabel %}
         Label: {{ j.label }}
         {% endif %}
         Terminate: {% if j.aterm == 'No' %}No{% else %}Yes
@@ -55,7 +55,7 @@ Jumper #{{ count.value }}:
         Port: {{ j.zport }}
         {% endif %}{% if j.zcable %}
         Jumper: {{ j.zcable }}
-        {% endif %}{% if j.label %}
+        {% endif %}{% if j.zlabel %}
         Label: {{ j.label }}
         {% endif %}{% if j.zterm %}
         Terminate: {{ j.zterm }}
@@ -134,7 +134,7 @@ h2. Section {{ loop.index }} - {{ section }}
 {%- for header, step in i.items() -%}
 {% if header == 'rh' %}
 # *&#91;RH]* {{ step }}
-{% elif header == 'cmd-rh' %}
+{% elif header == 'cmd_rh' %}
 {{ cmd('RH', step) }}
 {% elif header == 'noc' %}
 # *&#91;NOC]* {{ step }}

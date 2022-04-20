@@ -6,6 +6,7 @@ import yaml
 import typer
 from pydantic import ValidationError
 from jinja2 import Environment, FileSystemLoader
+
 from utils.schema import CDModel, MOPModel
 from utils.atlassian import Atlassian
 from utils.gcal import GCal
@@ -53,7 +54,6 @@ def yaml_init(yaml_type: str):
 def validate_yaml(data: dict, yaml_type: str):
     """Validate against schema for specified type."""
     try:
-        print(data)
         MOPModel(**data) if yaml_type == "mop" else CDModel(**data)
     except ValidationError as e:
         sys.exit(e)
@@ -91,9 +91,6 @@ def main(yaml_type: str, data: dict, **kwargs):
         validate_yaml(data, yaml_type)
         rendered_data = render_yaml(data, yaml_type)
 
-        if kwargs["default"]:
-            reset_yaml(repository, yaml_type, gcal_auth_path)
-
         if kwargs["render"]:
             print(rendered_data)
         else:
@@ -112,12 +109,14 @@ def main(yaml_type: str, data: dict, **kwargs):
             print(f"\tMoving YAML to repo: {repository}\n")
             gcal_auth_path = data["gcal_auth_path"] if yaml_type == "cd" else None
             move_yaml(page_title, repository, yaml_type)
+            if kwargs["default"]:
+                reset_yaml(repository, yaml_type, gcal_auth_path)
 
             if kwargs["link"]:
                 print(f"\tAdding link to {ticket}")
                 page_url = (
                     "https://documentation.cenic.org/display/Core/"
-                    f'{page_title.replace(" ", "+")}',
+                    f'{page_title.replace(" ", "+")}'
                 )
                 atlassian.jira_create_link([ticket, page_url, page_title])
 

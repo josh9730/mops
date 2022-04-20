@@ -13,21 +13,22 @@ from pydantic import (
 from .atlassian import Atlassian
 
 
-print()
-
 JIRA_PROJECTS_LIST = Atlassian().jira_projects_list()
 
 VALID_JUMPER_ITEMS = [
     "acable",
+    "alabel",
     "acage",
     "adevice",
     "aport",
     "arack",
     "aterm",
+    "zcable",
     "zcage",
     "zdevice",
     "zport",
     "zrack",
+    "zlabel",
     "zterm",
 ]
 
