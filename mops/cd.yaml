@@ -9,7 +9,7 @@ summary:
 # gcal_auth_path is path to Google Calendar auth tokens
 # start_time, end_time must be in form HH:MM
 # start_day must be either 'today' or in YYYY-MM-DD format
-gcal_auth_path: None
+gcal_auth_path: /Users/jdickman/Google Drive/My Drive/Scripts/
 start_time: 
 end_time: 
 start_day: 

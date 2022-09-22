@@ -37,7 +37,7 @@ Jumper #{{ count.value }}:
         {% endif %}{% if j.acable %}
         Jumper: {{ j.acable}}
         {% endif %}{% if j.alabel %}
-        Label: {{ j.label }}
+        Label: {{ j.alabel }}
         {% endif %}
         Terminate: {% if j.aterm == 'No' %}No{% else %}Yes
         {% endif %}
@@ -56,7 +56,7 @@ Jumper #{{ count.value }}:
         {% endif %}{% if j.zcable %}
         Jumper: {{ j.zcable }}
         {% endif %}{% if j.zlabel %}
-        Label: {{ j.label }}
+        Label: {{ j.zlabel }}
         {% endif %}{% if j.zterm %}
         Terminate: {{ j.zterm }}
         {% endif %}

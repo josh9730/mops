@@ -28,16 +28,17 @@
 
 
 repository: /Users/jdickman/Google Drive/My Drive/MOPs/YAML/
-page_title: 
-parent_page_id: 
-ticket: 
+page_title: SAND1 - SDSU Temp 2x10G
+parent_page_id: 8885131
+ticket: NOC-686423
 
 summary:
-  - 
-level: 
-executing_dep: 
-rh: 
-approval: 
+  - Install (2) 10G TXPs
+  - Connect TXPs to sdg-agg4
+level: 0
+executing_dep: NOC
+rh: SAND1
+approval: NOC-661561
 impact:
   - 
 escalation: Deploying Engineer
@@ -49,8 +50,120 @@ pre_maint:
   -
 
 tech_equip:
-  -
+  - Fiber tester
+  - Labeler
 shipping:
+  "NOC-686424":
+    - "770008946610"
+    - pending
 
 
 sections:
+  "Install Cards & Run Jumpers":
+    - rh: Locate SAND1CA38T in rack N5
+    - rh: Install the two 10G TXP cards into Slots 5 and 6. Verify the cards begin booting (process will take 5-10 minutes)
+    - noc: The following cables can all be viewed *[HERE|https://nautobot-1-staging.svl.cenic.org/dcim/devices/4cf61e27-fff9-4ea8-9a43-28bef1f61e03/interfaces/*] by selecting 'CableTrace' on the appropriate ports.
+    - jumper:
+      - Run the following LC-LC SMF jumpers for CLR-20837
+      - arack: N5
+        adevice: SAND1CA38T MD40 (facing SDSU)
+        aport: 1531.12nm
+        acable: 1m LC-LC
+        alabel: CLR-20837
+        aterm: 'Yes'
+        zrack: N5
+        zdevice: SAND1CA38T Slot 6
+        zport: 2 Trunk (builtin port)
+        zlabel: CLR-20837
+        zterm: 'Yes'
+      - arack: N5
+        adevice: SAND1CA38T Slot 6
+        aport: 2 (client pluggable)
+        acable: 1m LC-LC
+        alabel: CLR-20837
+        aterm: 'Yes'
+        zrack: N5
+        zdevice: SPK-SAND1-00.05.01-U40
+        zport: 2 Front
+        zlabel: CLR-20837
+        zterm: 'Yes'
+      - arack: W5
+        adevice: HUB-SAND1-00.05.05-U23
+        aport: 2 Front
+        acable: 1m LC-LC
+        alabel: CLR-20837
+        aterm: 'Yes'
+        zrack: W5
+        zdevice: HUB-SAND1-00.05.05-U22
+        zport: 6 Front
+        zlabel: CLR-20837
+        zterm: 'Yes'
+      - arack: P5
+        adevice: HSPK-SAND1-00.05.02-U25
+        aport: 6 Front
+        acable: 3m LC-LC
+        alabel: CLR-20837
+        aterm: 'Yes'
+        zrack: P5
+        zdevice: sdg-agg4
+        zport: Te0/2/0/2
+        zlabel: CLR-20837
+        zterm: 'Yes'
+      - arack: N5
+        adevice: SAND1CA38T MD40 (facing SDSU)
+        aport: 1531.90nm
+        acable: 1m LC-LC
+        alabel: CLR-20838
+        aterm: 'Yes'
+        zrack: N5
+        zdevice: SAND1CA38T Slot 7
+        zport: 2 Trunk (builtin port)
+        zlabel: CLR-20838
+        zterm: 'Yes'
+      - arack: N5
+        adevice: SAND1CA38T Slot 7
+        aport: 2 (client pluggable)
+        acable: 1m LC-LC
+        alabel: CLR-20838
+        aterm: 'Yes'
+        zrack: N5
+        zdevice: SPK-SAND1-00.05.01-U40
+        zport: 3 Front
+        zlabel: CLR-20838
+        zterm: 'Yes'
+      - arack: W5
+        adevice: HUB-SAND1-00.05.05-U23
+        aport: 3 Front
+        acable: 1m LC-LC
+        alabel: CLR-20838
+        aterm: 'Yes'
+        zrack: W5
+        zdevice: HUB-SAND1-00.05.05-U22
+        zport: 7 Front
+        zlabel: CLR-20838
+        zterm: 'Yes'
+      - arack: P5
+        adevice: HSPK-SAND1-00.05.02-U25
+        aport: 7 Front
+        acable: 3m LC-LC
+        alabel: CLR-20838
+        aterm: 'Yes'
+        zrack: P5
+        zdevice: sdg-agg4
+        zport: Te0/2/0/3
+        zlabel: CLR-20838
+        zterm: 'Yes'
+
+    cmd_noc:
+      - Once RH has completed all of the above jumpers, configure facility loops to verify connectivity (note the SDSU side has not been configured)
+      - |-
+        SAND1CA38T
+          Slot 6 -> Maintenance -> Loopback
+            Set Port 1 (client) to Facility loop
+          Verify that sdg-agg4 Te0/2/0/2 comes up (unshut port if needed)
+
+          Slot 7 -> Maintenance -> Loopback
+            Set Port 1 (client) to Facility loop
+          Verify that sdg-agg4 Te0/2/0/3 comes up (unshut port if needed)
+
+          Release loops once connectivity is verified. 

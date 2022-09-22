@@ -148,7 +148,7 @@ class MOPModel(BaseYAML):
     rollback_steps: Optional[list]
     pre_maint: Optional[list]
     rh_equip: Optional[list]
-    shipping: dict[str, list]
+    shipping: Optional[dict[str, list]]
     sections: dict[str, list]
 
     @validator("ticket", "approval")

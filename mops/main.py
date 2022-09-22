@@ -6,6 +6,7 @@ import yaml
 import typer
 from pydantic import ValidationError
 from jinja2 import Environment, FileSystemLoader
+from datetime import datetime
 
 from utils.schema import CDModel, MOPModel
 from utils.atlassian import Atlassian
@@ -67,9 +68,10 @@ def move_yaml(*args: str):
       repository: path
       yaml_type: str
     """
+    date = datetime.today().strftime("%Y-%m-%d")
     shutil.copy(
         f"{os.path.dirname(__file__)}/{args[2]}.yaml",
-        f'{args[1]}{args[2]}/{args[0].replace(" ", "_")}.yaml',
+        f'{args[1]}{args[2]}/{date}_{args[0].replace(" ", "_")}.yaml',
     )
 
 
