@@ -1,17 +1,17 @@
-import sys
 import os
+import re
 import shutil
-from typing import Optional
-import yaml
-import typer
-from pydantic import ValidationError
-from jinja2 import Environment, FileSystemLoader
+import sys
 from datetime import datetime
+from typing import Optional
 
-from utils.schema import CDModel, MOPModel
+import typer
+import yaml
+from jinja2 import Environment, FileSystemLoader
+from pydantic import ValidationError
 from utils.atlassian import Atlassian
 from utils.gcal import GCal
-
+from utils.schema import CDModel, MOPModel
 
 mops = typer.Typer(
     add_completion=False,
@@ -60,7 +60,7 @@ def validate_yaml(data: dict, yaml_type: str):
         sys.exit(e)
 
 
-def move_yaml(*args: str):
+def move_yaml(page_title: str, repository: str, yaml_type: str) -> None:
     """Move YAML to designated repo.
 
     args:
@@ -68,10 +68,13 @@ def move_yaml(*args: str):
       repository: path
       yaml_type: str
     """
+    # print(re.sub("[a-z]*@", "abc@", str))
+    page_title = re.sub(r"/| ", "_", page_title)
+    print(page_title)
     date = datetime.today().strftime("%Y-%m-%d")
     shutil.copy(
-        f"{os.path.dirname(__file__)}/{args[2]}.yaml",
-        f'{args[1]}{args[2]}/{date}_{args[0].replace(" ", "_")}.yaml',
+        f"{os.path.dirname(__file__)}/{yaml_type}.yaml",
+        f"{repository}{yaml_type}/{date}_{page_title}.yaml",
     )
 
 
@@ -154,7 +157,7 @@ def cd(
             f"\n\t\tStart: {start_time}\n\t\tEnd: {end_time}\n",
         )
         gcal = GCal(data["gcal_auth_path"])
-        title = data["ticket"] + data["page_title"]
+        title = data["ticket"] + ": " + data["page_title"]
         gcal.create_calendar_event(start_time, end_time, start_day, title)
 
 

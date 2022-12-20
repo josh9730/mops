@@ -1,17 +1,19 @@
+import datetime
 import re
 import sys
-import datetime
 from enum import Enum
 from typing import Optional, Union
+
 from pydantic import (
     BaseModel,
+    ConstrainedStr,
+    DirectoryPath,
+    HttpUrl,
     conint,
     validator,
-    DirectoryPath,
-    ConstrainedStr,
 )
-from .atlassian import Atlassian
 
+from .atlassian import Atlassian
 
 JIRA_PROJECTS_LIST = Atlassian().jira_projects_list()
 
@@ -146,6 +148,8 @@ class MOPModel(BaseYAML):
     escalation: Optional[str] = "Deploying Engineer"
     partial_rollback: bool
     rollback_steps: Optional[list]
+    nb_cables: Optional[dict[str, HttpUrl]]
+    nb_devices: Optional[dict[str, HttpUrl]]
     pre_maint: Optional[list]
     rh_equip: Optional[list]
     shipping: Optional[dict[str, list]]
@@ -159,6 +163,7 @@ class MOPModel(BaseYAML):
     @validator("shipping")
     def check_shipping(cls, shipping):
         """Validate shipping dict."""
+        print(shipping)
         for shipping_ticket, shipping_info in shipping.items():
             BaseYAML.check_tickets_all(shipping_ticket)
             for i in shipping_info:

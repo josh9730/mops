@@ -90,6 +90,20 @@ h1. NOC Section
 {% else %}
 * Rollback is reverse of MOP
 {% endif %}|
+||h3. NAUTOBOT CABLES|{% if nb_cables %}
+{%- for clr, link in nb_cables.items() %}
+* *[{{ clr }}|{{ link }}]*
+{% endfor %}
+{% else %}
+*
+{% endif %}|
+||h3. NAUTOBOT DEVICES|{% if nb_devices %}
+{%- for name, link in nb_devices.items() %}
+* *[{{ name }}|{{ link }}]*
+{% endfor %}
+{% else %}
+*
+{% endif %}|
 \\
 
 {% if pre_maint[0] -%}
