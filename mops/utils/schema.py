@@ -79,9 +79,9 @@ class BaseYAML(BaseModel):
     def check_tickets_all(ticket):
         """Validate Jira ticket."""
         error_msg = f"{ticket} must be a valid ticket number."
-        assert ticket[:3] in JIRA_PROJECTS_LIST, error_msg
         assert ticket[3] == "-", error_msg
         assert ticket[4:].isdigit(), error_msg
+        assert ticket[:3] in JIRA_PROJECTS_LIST, error_msg
         return ticket
 
 
@@ -163,11 +163,11 @@ class MOPModel(BaseYAML):
     @validator("shipping")
     def check_shipping(cls, shipping):
         """Validate shipping dict."""
-        print(shipping)
-        for shipping_ticket, shipping_info in shipping.items():
-            BaseYAML.check_tickets_all(shipping_ticket)
-            for i in shipping_info:
-                assert isinstance(i, str), f"{i} must be a valid string."
+        if shipping:
+            for shipping_ticket, shipping_info in shipping.items():
+                BaseYAML.check_tickets_all(shipping_ticket)
+                for i in shipping_info:
+                    assert isinstance(i, str), f"{i} must be a valid string."
 
     @validator("sections")
     def check_sections(cls, sections):
@@ -182,7 +182,7 @@ class MOPModel(BaseYAML):
                     ), f"Invalid section option: '{section_header}', must use one of {SectionOptions.list()}"
                     assert isinstance(section_value, str) or isinstance(
                         section_value, list
-                    )
+                    ), f"Section header is not a list or string: \n\n{section_value}\n\n"
 
                     if section_header == "jumper":
                         # check jumper var
@@ -198,4 +198,6 @@ class MOPModel(BaseYAML):
                     elif isinstance(section_value, list):
                         # check multi-line vars
                         for i in section_value:
-                            assert isinstance(i, str)
+                            assert isinstance(
+                                i, str
+                            ), f"Line is not a string: \n\n{i}\n\n"

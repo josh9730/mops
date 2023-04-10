@@ -7,7 +7,7 @@ class Atlassian:
 
     def __init__(self):
         jira_url = keyring.get_password("jira", "url")
-        confluence_url = keyring.get_password("confl", "url")
+        confluence_url = keyring.get_password("confluence", "url")
         username = keyring.get_password("cas", "user")
         password = keyring.get_password("cas", username)
 

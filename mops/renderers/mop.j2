@@ -82,7 +82,7 @@ h1. NOC Section
 ||h3. ESCALATION|{{ escalation }}|
 ||h3. PARTIAL ROLLBACK|{{ partial_rollback }}|
 ||h3. ROLLBACK STEPS|{% if rollback_steps[0] %}
-{%- for i in rollback %}
+{%- for i in rollback_steps %}
 {noformat:nopanel=true}
 {{ i }}
 {noformat}
@@ -104,6 +104,18 @@ h1. NOC Section
 {% else %}
 *
 {% endif %}|
+||h3. 7 BUSINESS DAY CLEANUP|{% if cleanups[0]%}
+{%- for i in cleanups %}
+{noformat:nopanel=true}
+{{ i }}
+{noformat}
+{% endfor %}
+{% endif %}|
+\\
+
+{% if migration_table[0] %}
+{{ migration_table[0] }}
+{% endif %}
 \\
 
 {% if pre_maint[0] -%}
