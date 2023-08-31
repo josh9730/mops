@@ -79,8 +79,8 @@ h1. NOC Section
 ||h3. REMOTE HANDS|{{ rh }}|
 ||h3. RH APPROVAL|*[{{ approval }}|https://servicedesk.cenic.org/browse/{{ approval }}]*|
 {% endif %}
-||h3. ESCALATION|{{ escalation }}|
-||h3. PARTIAL ROLLBACK|{{ partial_rollback }}|
+||h3. ESCALATION|{{ escalation }} |
+||h3. PARTIAL ROLLBACK|{{ partial_rollback }} |
 ||h3. ROLLBACK STEPS|{% if rollback_steps[0] %}
 {%- for i in rollback_steps %}
 {noformat:nopanel=true}
@@ -89,28 +89,28 @@ h1. NOC Section
 {% endfor %}
 {% else %}
 * Rollback is reverse of MOP
-{% endif %}|
+{% endif %} |
 ||h3. NAUTOBOT CABLES|{% if nb_cables %}
 {%- for clr, link in nb_cables.items() %}
 * *[{{ clr }}|{{ link }}]*
 {% endfor %}
 {% else %}
 *
-{% endif %}|
+{% endif %} |
 ||h3. NAUTOBOT DEVICES|{% if nb_devices %}
 {%- for name, link in nb_devices.items() %}
 * *[{{ name }}|{{ link }}]*
 {% endfor %}
 {% else %}
 *
-{% endif %}|
+{% endif %} |
 ||h3. 7 BUSINESS DAY CLEANUP|{% if cleanups[0]%}
 {%- for i in cleanups %}
 {noformat:nopanel=true}
 {{ i }}
 {noformat}
 {% endfor %}
-{% endif %}|
+{% endif %} |
 \\
 
 {% if migration_table[0] %}
@@ -140,18 +140,20 @@ h2. +PRE-MAINTENANCE+
 
 h1. +*{{ '{{' }}MOP START}}*+
 \\
-{% if tech_equip %}
-|Tech Equipment|{% for i in tech_equip %}
-* {{ i }}
-{% endfor %}{% endif %}
 {% if shipping %}
 ||Shipping Ticket||Tracking #||Inbound Ticket||
 {% for i in shipping %}
-|{{ i }}|{{ shipping[i][0] }}|{{ shipping[i][1] }}|
+|{{ i }}|{{ shipping[i][0] }} |{{ shipping[i][1] }} |
 {% endfor %}{% endif %}
 
 {% if rh %}
-h4. Please call 714-220-3494 before starting and reference {{ ticket }}.
+h4. Please call 714-220-3494 before starting and reference *{{ ticket }}*.
+\\
+{% if tech_equip[0] %}
+*Tech Equipment*
+{% for i in tech_equip %}
+* {{ i }}
+{% endfor %}{% endif %}
 {% endif %}
 
 {% for section, step_dict in sections.items() %}

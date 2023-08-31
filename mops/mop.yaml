@@ -28,16 +28,16 @@
 
 
 repository: /Users/jdickman/Google Drive/My Drive/MOPs/YAML/
-page_title: Fresno MX - Bulk Panel Audit
-parent_page_id: 64139983
-ticket: NOC-701341
+page_title: 
+parent_page_id: 
+ticket: 
 
 summary:
-  - Audit xconnect panels in C12.02 and C09.05
-level: 0
-executing_dep: NOC
-rh: FRES1
-approval: COR-2218
+  - 
+level: 
+executing_dep: 
+rh: 
+approval: 
 impact:
   - 
 escalation: Deploying Engineer
@@ -50,48 +50,15 @@ nb_devices:  # device_name: link
 migration_table:
   -
 
+pre_maint:
+  -
+
 cleanups:
   - |-
 
-pre_maint:
-  - 
-
 tech_equip:
-  - labeler
-  - fiber tester
+  -
 shipping:
 
 
 sections:
-  "Audit Lumen Bulk Panels":
-    - rh: From previous remote hands work, some jumpers were likely not run as expected. This work is to audit and document these panels.
-    - rh: There are two panels in C12.02 and two panels in C09.05. These were provided by Lumen, and the rear ports connect to the remote panels
-    - rh: From the two panels in C12.02, provide a complete list of where each jumper terminates to. This will either be to the Cisco NX switch or Juniper MX router.
-    - rh: The two panels in C09.05 will have to be traced in stages.
-    - rh: Stage 1 - Trace the bulk panel cables. These will terminate on one of the modular panels designated 'HUB-'
-    - rh: Stage 2 - Trace from the 'HUB-' panel. This can be done by 1) Identifying the front port number that faces the bulk panel (i.e. Port 1/2), 2) Tracing the MPO-24 in the rear of the panel to the remote rack and 3) Once the remote rack/panel is identified, trace from the same port number identified earlier
-    - cmd_rh: 
-      - Repeat the above until you reach a transponder card or other networking device. CENIC NOC can help with identifying the 'expected' jumper runs from our documentation
-      - |-
-        Example:
-          00.09.05.BULK-XCONNECT-PANEL-U37
-            Port 1/2 front
-          
-          -- Connects to --
-
-          HUB-FRES1-00.09.05-U34
-            Slot 1 Port 1/2 Front
-          
-          == MPO-24 ==
-
-          SPK-FRES1-00.09.07-U09
-            Slot 1 Port 1/2 Front
-
-          -- Connects to --
-
-          fres1ca51o - Shelf 5
-            Slot 5 Port 1 (CPAK optic)
-    - noc: Remember to use Nautobot to help RH and to validate the information from RH
-    - rh: Provide pictures of the fronts of all (4) panels.
-
-      

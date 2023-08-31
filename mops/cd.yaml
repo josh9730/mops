@@ -1,23 +1,17 @@
 ---
 repository: /Users/jdickman/Google Drive/My Drive/MOPs/YAML/
-ticket: COR-3217
-page_title: Cost-In CLR-20653
-parent_page_id: 8884129
+ticket: 
+page_title: 
+parent_page_id: 
 summary:
- - Cost-In CLR-20653
+ - 
 
 # gcal_auth_path is path to Google Calendar auth tokens
 # start_time, end_time must be in form HH:MM
 # start_day must be either 'today' or in YYYY-MM-DD format
 gcal_auth_path: /Users/jdickman/Google Drive/My Drive/Scripts/
-start_time:
-end_time:
+start_time: 
+end_time: 
 start_day: 
 
 changes:
-  bakcc-cpe-01:
-    - |-
-      set protocols isis interface xe-0/1/3.0 metric 1000 ipv6-unicast-metric 1000
-  porcc-cpe-01:
-    - |-
-      set protocols isis interface xe-0/1/3.0 metric 1000 ipv6-unicast-metric 1000
